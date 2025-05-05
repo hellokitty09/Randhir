@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destinations - Wanderlust Travel</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="page-header">
+        <nav class="top-nav">
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="destinations.html" class="active">Destinations</a>
+                <a href="about.html">About Us</a>
+                <a href="#">Experiences</a>
+                <a href="#">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="destinations-page">
+        <section class="filter-section">
+            <div class="filter-container">
+                <div class="filter-group">
+                    <label for="region">Region</label>
+                    <select id="region">
+                        <option value="">All Regions</option>
+                        <option value="europe">Europe</option>
+                        <option value="asia">Asia</option>
+                        <option value="africa">Africa</option>
+                        <option value="americas">Americas</option>
+                        <option value="oceania">Oceania</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="duration">Duration</label>
+                    <select id="duration">
+                        <option value="">Any Duration</option>
+                        <option value="short">1-3 Days</option>
+                        <option value="medium">4-7 Days</option>
+                        <option value="long">8+ Days</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="activity">Activity Type</label>
+                    <select id="activity">
+                        <option value="">All Activities</option>
+                        <option value="adventure">Adventure</option>
+                        <option value="cultural">Cultural</option>
+                        <option value="relaxation">Relaxation</option>
+                        <option value="wildlife">Wildlife</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <section class="destinations-grid">
+            <article class="destination-card">
+                <div class="destination-image">
+                    <img src="https://images.unsplash.com/photo-1513581166391-887a96ddeafd" alt="Paris cityscape" loading="lazy">
+                    <div class="destination-tag">Cultural</div>
+                </div>
+                <div class="destination-content">
+                    <h3>Romantic Paris</h3>
+                    <p class="destination-description">Experience the magic of the City of Light with our curated Parisian adventure.</p>
+                    <div class="destination-details">
+                        <span><i class="fas fa-clock"></i> 5 days</span>
+                        <span><i class="fas fa-star"></i> 4.9</span>
+                        <span><i class="fas fa-euro-sign"></i> From €1,299</span>
+                    </div>
+                    <a href="#" class="btn-explore">Explore Package</a>
+                </div>
+            </article>
+
+            <article class="destination-card">
+                <div class="destination-image">
+                    <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e" alt="Tokyo at night" loading="lazy">
+                    <div class="destination-tag">Cultural</div>
+                </div>
+                <div class="destination-content">
+                    <h3>Tokyo Discovery</h3>
+                    <p class="destination-description">Dive into the fascinating blend of tradition and innovation in Tokyo.</p>
+                    <div class="destination-details">
+                        <span><i class="fas fa-clock"></i> 7 days</span>
+                        <span><i class="fas fa-star"></i> 4.8</span>
+                        <span><i class="fas fa-yen-sign"></i> From ¥180,000</span>
+                    </div>
+                    <a href="#" class="btn-explore">Explore Package</a>
+                </div>
+            </article>
+
+            <article class="destination-card">
+                <div class="destination-image">
+                    <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801" alt="African Safari" loading="lazy">
+                    <div class="destination-tag">Wildlife</div>
+                </div>
+                <div class="destination-content">
+                    <h3>Serengeti Safari</h3>
+                    <p class="destination-description">Witness the incredible wildlife of Africa in their natural habitat.</p>
+                    <div class="destination-details">
+                        <span><i class="fas fa-clock"></i> 8 days</span>
+                        <span><i class="fas fa-star"></i> 5.0</span>
+                        <span><i class="fas fa-dollar-sign"></i> From $3,499</span>
+                    </div>
+                    <a href="#" class="btn-explore">Explore Package</a>
+                </div>
+            </article>
+
+            <article class="destination-card">
+                <div class="destination-image">
+                    <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4" alt="Bali temples" loading="lazy">
+                    <div class="destination-tag">Relaxation</div>
+                </div>
+                <div class="destination-content">
+                    <h3>Bali Retreat</h3>
+                    <p class="destination-description">Find peace and tranquility in the spiritual heart of Indonesia.</p>
+                    <div class="destination-details">
+                        <span><i class="fas fa-clock"></i> 10 days</span>
+                        <span><i class="fas fa-star"></i> 4.9</span>
+                        <span><i class="fas fa-dollar-sign"></i> From $1,899</span>
+                    </div>
+                    <a href="#" class="btn-explore">Explore Package</a>
+                </div>
+            </article>
+        </section>
+
+        <div class="pagination">
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-left">
+                <h3>About Wanderlust</h3>
+                <p>We curate unforgettable travel experiences for adventurous souls seeking authentic connections with nature and culture.</p>
+            </div>
+            
+            <div class="footer-center">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="destinations.html">Destinations</a>
+                <a href="about.html">About Us</a>
+                <a href="#">Blog</a>
+                <a href="#">Contact</a>
+            </div>
+            
+            <div class="footer-right">
+                <h3>Connect With Us</h3>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+                </div>
+                <p>Subscribe to our newsletter for travel updates and exclusive offers!</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Filter functionality
+        const filters = document.querySelectorAll('select');
+        filters.forEach(filter => {
+            filter.addEventListener('change', function() {
+                // Add filter logic here
+                console.log('Filter changed:', this.id, this.value);
+            });
+        });
+
+        // Intersection Observer for animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.destination-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html> 
