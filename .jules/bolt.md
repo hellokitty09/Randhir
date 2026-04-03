@@ -1,0 +1,3 @@
+## 2024-04-03 - getBoundingClientRect in scroll events causes jank, unobserve saves CPU
+**Learning:** Checking `getBoundingClientRect()` inside a `scroll` event listener forces synchronous layout recalculations, causing significant scroll jank. Furthermore, using `IntersectionObserver` for fade-in animations without calling `unobserve(entry.target)` causes the observer callback to continuously fire unnecessarily when scrolling past already animated elements.
+**Action:** Replace `scroll` listeners + `getBoundingClientRect` with `IntersectionObserver`. Always call `observer.unobserve(entry.target)` inside the observer callback for elements that only need to trigger an action (like an animation) once.
