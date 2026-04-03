@@ -26,37 +26,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Add sliding animation for gallery items
+    // Add sliding animation for gallery items using IntersectionObserver for better performance
     const galleryItems = document.querySelectorAll('.gallery-item');
     
-    // Function to check if element is in viewport
-    function isInViewport(element) {
-        const rect = element.getBoundingClientRect();
-        return (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
-    }
+    if (galleryItems.length > 0) {
+        const galleryObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    // Add delay based on index for staggered animation
+                    setTimeout(() => {
+                        entry.target.classList.add('slide-in');
+                    }, index * 100);
+                    // Stop observing once animated
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
 
-    // Function to handle animation
-    function handleAnimation() {
-        galleryItems.forEach((item, index) => {
-            if (isInViewport(item) && !item.classList.contains('slide-in')) {
-                // Add delay based on index for staggered animation
-                setTimeout(() => {
-                    item.classList.add('slide-in');
-                }, index * 100);
-            }
+        galleryItems.forEach(item => {
+            galleryObserver.observe(item);
         });
     }
-
-    // Initial check for elements in viewport with a small delay
-    setTimeout(handleAnimation, 100);
-
-    // Check on scroll
-    window.addEventListener('scroll', handleAnimation);
 
     // Add hover effect for gallery items
     galleryItems.forEach(item => {
