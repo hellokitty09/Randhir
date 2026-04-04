@@ -77,10 +77,17 @@ document.addEventListener('DOMContentLoaded', () => {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
-            // Get form values
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
+            // 🛡️ Security: Sanitize input to prevent XSS
+            const sanitize = (str) => {
+                const div = document.createElement('div');
+                div.textContent = str.trim();
+                return div.innerHTML;
+            };
+
+            // Get and sanitize form values
+            const name = sanitize(document.getElementById('name').value);
+            const email = sanitize(document.getElementById('email').value);
+            const message = sanitize(document.getElementById('message').value);
             
             // Here you would typically send the form data to a server
             // For now, we'll just show an alert
@@ -90,4 +97,4 @@ document.addEventListener('DOMContentLoaded', () => {
             contactForm.reset();
         });
     }
-}); 
+});
