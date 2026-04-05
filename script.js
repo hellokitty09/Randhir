@@ -78,10 +78,27 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             
             // Get form values
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
             
+            // Security: Input validation
+            if (name.length === 0 || name.length > 50) {
+                alert('Invalid name. Must be 1-50 characters.');
+                return;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email) || email.length > 100) {
+                alert('Invalid email format or length.');
+                return;
+            }
+
+            if (message.length === 0 || message.length > 1000) {
+                alert('Invalid message. Must be 1-1000 characters.');
+                return;
+            }
+
             // Here you would typically send the form data to a server
             // For now, we'll just show an alert
             alert(`Thank you for your message, ${name}! We'll get back to you at ${email} soon.`);
