@@ -77,10 +77,22 @@ document.addEventListener('DOMContentLoaded', () => {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
-            // Get form values
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
+            // Get form values and validate length
+            // 🛡️ Sentinel: added security validation to prevent excessively long inputs and invalid emails
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+
+            if (name.length > 100 || email.length > 100 || message.length > 1000) {
+                alert("Error: Input length exceeds maximum allowed characters.");
+                return;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert("Error: Invalid email format.");
+                return;
+            }
             
             // Here you would typically send the form data to a server
             // For now, we'll just show an alert
