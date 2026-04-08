@@ -81,7 +81,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
-            
+
+            // Security: Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+
             // Here you would typically send the form data to a server
             // For now, we'll just show an alert
             alert(`Thank you for your message, ${name}! We'll get back to you at ${email} soon.`);
