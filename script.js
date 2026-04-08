@@ -26,37 +26,34 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Add sliding animation for gallery items
+    // ⚡ Bolt: Replaced expensive scroll event listener and synchronous getBoundingClientRect()
+    // with natively optimized IntersectionObserver for gallery item animations.
+    // Why: `scroll` fires frequently and `getBoundingClientRect` causes layout thrashing, blocking the main thread.
+    // Impact: Avoids main thread blocking and forced reflows during scrolling, reducing jank.
+    // Measurement: Monitor main thread activity in DevTools performance tab during scroll.
     const galleryItems = document.querySelectorAll('.gallery-item');
     
-    // Function to check if element is in viewport
-    function isInViewport(element) {
-        const rect = element.getBoundingClientRect();
-        return (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
-    }
-
-    // Function to handle animation
-    function handleAnimation() {
-        galleryItems.forEach((item, index) => {
-            if (isInViewport(item) && !item.classList.contains('slide-in')) {
-                // Add delay based on index for staggered animation
+    const galleryObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                // Determine staggered index based on horizontal position or just apply a class
+                // Actually, since we unobserve immediately, standard intersection without index is often fine,
+                // but to preserve the stagger we can use a small delay based on the index in the original list.
+                const item = entry.target;
+                const index = Array.from(galleryItems).indexOf(item);
                 setTimeout(() => {
                     item.classList.add('slide-in');
-                }, index * 100);
+                }, index * 100); // Note: For better visual in a real grid, delay could be based on row/col, but preserving original logic.
+
+                // Stop observing once animated
+                observer.unobserve(item);
             }
         });
-    }
+    }, { threshold: 0.1 });
 
-    // Initial check for elements in viewport with a small delay
-    setTimeout(handleAnimation, 100);
-
-    // Check on scroll
-    window.addEventListener('scroll', handleAnimation);
+    galleryItems.forEach(item => {
+        galleryObserver.observe(item);
+    });
 
     // Add hover effect for gallery items
     galleryItems.forEach(item => {
