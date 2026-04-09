@@ -1,0 +1,3 @@
+## 2024-05-24 - Layout Thrashing with Scroll Events
+**Learning:** Using `window.addEventListener('scroll')` coupled with `element.getBoundingClientRect()` inside the event handler is a severe performance anti-pattern. This combination forces the browser to recalculate layout (layout thrashing) synchronously on every scroll event, drastically dropping the framerate and causing janky scrolling.
+**Action:** Always replace scroll-based visibility checks with `IntersectionObserver`. It offloads visibility calculations to the browser's optimized internal mechanisms asynchronously, preventing layout thrashing and maintaining a smooth 60fps scrolling experience. Ensure to use `observer.unobserve()` once the desired condition is met to stop unnecessary monitoring.
