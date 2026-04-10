@@ -1,0 +1,4 @@
+## 2024-03-21 - Defense in Depth: DoS Mitigation via Input Constraints
+**Vulnerability:** The contact form lacked length limits on input fields, creating a risk for DoS or memory exhaustion from excessively large inputs if an attacker submitted extremely long strings. It was initially thought that passing input to `window.alert()` constituted an XSS risk, but since `alert` is a plain text sink, no XSS vulnerability existed.
+**Learning:** Understanding context is crucial—plain text sinks like `alert` do not execute HTML, so sanitization in this specific case introduces UI bugs (displaying HTML entities) rather than improving security. However, unbounded input length remains a valid concern.
+**Prevention:** Enforce input length limits directly on HTML form elements using the `maxlength` attribute as a lightweight layer of defense.
