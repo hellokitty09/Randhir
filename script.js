@@ -29,34 +29,38 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add sliding animation for gallery items
     const galleryItems = document.querySelectorAll('.gallery-item');
     
-    // Function to check if element is in viewport
-    function isInViewport(element) {
-        const rect = element.getBoundingClientRect();
-        return (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
-    }
+    // ⚡ Bolt: Replaced scroll event listener and getBoundingClientRect with IntersectionObserver.
+    // This offloads visibility checking to the browser, preventing synchronous layout thrashing
+    // and main thread blocking on scroll events, improving scroll performance and framerate.
+    if ('IntersectionObserver' in window) {
+        const animationObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting && !entry.target.classList.contains('slide-in')) {
+                    // Add delay based on index for staggered animation of items intersecting at the same time
+                    setTimeout(() => {
+                        entry.target.classList.add('slide-in');
+                    }, index * 100);
+                    // Stop observing once animated to save resources
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        });
 
-    // Function to handle animation
-    function handleAnimation() {
+        galleryItems.forEach(item => {
+            animationObserver.observe(item);
+        });
+    } else {
+        // Fallback for browsers that do not support IntersectionObserver
         galleryItems.forEach((item, index) => {
-            if (isInViewport(item) && !item.classList.contains('slide-in')) {
-                // Add delay based on index for staggered animation
-                setTimeout(() => {
-                    item.classList.add('slide-in');
-                }, index * 100);
-            }
+            setTimeout(() => {
+                item.classList.add('slide-in');
+            }, index * 100);
         });
     }
-
-    // Initial check for elements in viewport with a small delay
-    setTimeout(handleAnimation, 100);
-
-    // Check on scroll
-    window.addEventListener('scroll', handleAnimation);
 
     // Add hover effect for gallery items
     galleryItems.forEach(item => {
