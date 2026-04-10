@@ -1,0 +1,3 @@
+## 2024-04-10 - Replace Scroll Event Handlers with IntersectionObserver
+**Learning:** Using `window.addEventListener('scroll', ...)` combined with `element.getBoundingClientRect()` causes synchronous layout thrashing, as the browser is forced to recalculate layout on every scroll tick. This blocks the main thread and leads to scroll jank.
+**Action:** Always prefer `IntersectionObserver` for element visibility detection (e.g., triggering animations on scroll, lazy loading). It offloads visibility calculations to the browser, significantly improving scroll performance and framerate.
