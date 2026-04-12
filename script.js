@@ -78,9 +78,26 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             
             // Get form values
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
+            let name = document.getElementById('name').value;
+            let email = document.getElementById('email').value;
+            let message = document.getElementById('message').value;
+
+            // Sanitize inputs to prevent XSS
+            const sanitizeHTML = (str) => {
+                return str.replace(/[&<>'"]/g,
+                    tag => ({
+                        '&': '&amp;',
+                        '<': '&lt;',
+                        '>': '&gt;',
+                        "'": '&#39;',
+                        '"': '&quot;'
+                    }[tag] || tag)
+                );
+            };
+
+            name = sanitizeHTML(name.trim());
+            email = sanitizeHTML(email.trim());
+            message = sanitizeHTML(message.trim());
             
             // Here you would typically send the form data to a server
             // For now, we'll just show an alert
