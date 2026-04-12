@@ -1,0 +1,3 @@
+## 2024-04-12 - Layout Thrashing via Scroll Listeners
+**Learning:** The previous implementation used a synchronous `window.addEventListener('scroll', handleAnimation)` coupled with `getBoundingClientRect()` inside a loop. This is a severe anti-pattern that forces the browser to recalculate layout (layout thrashing) on the main thread for every single scroll event, leading to significant jank on pages with many animated elements.
+**Action:** Always prefer the modern `IntersectionObserver` API for viewport visibility checks instead of binding to the scroll event. It offloads the work from the main thread, and we can use `observer.unobserve()` to stop tracking elements once they have been animated, saving CPU cycles.
