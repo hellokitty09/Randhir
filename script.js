@@ -77,11 +77,16 @@ document.addEventListener('DOMContentLoaded', () => {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
-            // Get form values
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
+            // Get form values and trim
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
             
+            if (!name || !email || !message) {
+                alert('Please fill out all required fields.');
+                return;
+            }
+
             // Here you would typically send the form data to a server
             // For now, we'll just show an alert
             alert(`Thank you for your message, ${name}! We'll get back to you at ${email} soon.`);
