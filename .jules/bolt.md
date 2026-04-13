@@ -1,0 +1,3 @@
+## 2026-04-13 - [Scroll-bound Layout Thrashing]
+**Learning:** Checking element visibility inside a generic `window.addEventListener('scroll')` via `getBoundingClientRect()` triggers layout thrashing (synchronous main-thread blocking) by continuously requesting layout calculation on every scroll frame.
+**Action:** Always use `IntersectionObserver` when testing visibility to allow the browser to asynchronously handle intersection computations and unobserve items once they appear if appropriate.
