@@ -56,7 +56,20 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(handleAnimation, 100);
 
     // Check on scroll
-    window.addEventListener('scroll', handleAnimation);
+    // 💡 What: Throttled scroll event listener using requestAnimationFrame
+    // 🎯 Why: handleAnimation calls getBoundingClientRect which triggers layout. Doing this on every scroll event causes layout thrashing.
+    // 📊 Impact: Maintains 60fps scrolling by ensuring calculations only happen once per frame.
+    // 🔬 Measurement: Observe smoother scrolling in performance profile (fewer long tasks).
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                handleAnimation();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }, { passive: true }); // passive: true prevents blocking the main thread
 
     // Add hover effect for gallery items
     galleryItems.forEach(item => {

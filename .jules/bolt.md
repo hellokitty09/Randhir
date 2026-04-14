@@ -1,0 +1,3 @@
+## 2024-05-14 - Scroll Event Layout Thrashing
+**Learning:** Found an unthrottled scroll event listener in `script.js` that calls `getBoundingClientRect()` on multiple elements via `handleAnimation()`. Since `getBoundingClientRect()` forces synchronous layout/reflow, executing it on every pixel of scroll without throttling causes layout thrashing and drops frames, especially on pages with many elements.
+**Action:** When implementing scroll-triggered animations or checks, always throttle the event listener using `requestAnimationFrame` with a boolean flag, and use the `{ passive: true }` option to ensure the main thread isn't blocked. Alternatively, prefer `IntersectionObserver` when applicable.
