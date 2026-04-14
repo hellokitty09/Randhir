@@ -71,16 +71,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Utility to sanitize input (defense in depth)
+    const escapeHtml = (unsafe) => {
+        if (typeof unsafe !== 'string') return '';
+        return unsafe
+             .replace(/&/g, "&amp;")
+             .replace(/</g, "&lt;")
+             .replace(/>/g, "&gt;")
+             .replace(/"/g, "&quot;")
+             .replace(/'/g, "&#039;");
+    };
+
     // Handle contact form submission
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
-            // Get form values
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
+            // Get and sanitize form values
+            const name = escapeHtml(document.getElementById('name').value);
+            const email = escapeHtml(document.getElementById('email').value);
+            const message = escapeHtml(document.getElementById('message').value);
             
             // Here you would typically send the form data to a server
             // For now, we'll just show an alert
