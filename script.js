@@ -77,10 +77,16 @@ document.addEventListener('DOMContentLoaded', () => {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
-            // Get form values
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
+            // Get form values and sanitize
+            const sanitize = (str) => {
+                const div = document.createElement('div');
+                div.textContent = str;
+                return div.innerHTML;
+            };
+
+            const name = sanitize(document.getElementById('name').value);
+            const email = sanitize(document.getElementById('email').value);
+            const message = sanitize(document.getElementById('message').value);
             
             // Here you would typically send the form data to a server
             // For now, we'll just show an alert
