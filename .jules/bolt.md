@@ -1,0 +1,3 @@
+## 2024-04-17 - Throttling Scroll Event Listeners
+**Learning:** Attaching layout-heavy functions like `getBoundingClientRect()` (inside `isInViewport`) directly to scroll events can cause severe layout thrashing and drop frames below 60fps, as the event fires dozens of times per second.
+**Action:** Always throttle scroll or resize event listeners that trigger layout calculations using `requestAnimationFrame` with a boolean flag. This ensures the calculation only runs once per frame, maintaining high performance and smooth animations.
