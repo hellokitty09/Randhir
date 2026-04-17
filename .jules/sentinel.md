@@ -1,0 +1,4 @@
+## 2024-04-17 - Client-Side Validation and Alert Security
+**Vulnerability:** Missing input length limits (DoS risk) and lack of frontend validation.
+**Learning:** Adding `maxlength` attributes to HTML inputs provides a first layer of defense against oversized inputs. While `alert()` displays strings as plain text and is immune to HTML-based XSS, validating inputs (e.g., trimming whitespace, ensuring required fields, and checking email formats) is crucial before processing or sending data. Attempting to HTML-encode inputs for `alert()` is an anti-pattern that causes functional regressions (e.g., displaying HTML entities instead of valid characters like apostrophes).
+**Prevention:** 1) Implement `maxlength` attributes on HTML inputs. 2) Add JavaScript validation to ensure data integrity before submission or processing. 3) Avoid unnecessary HTML sanitization when passing data to functions that expect and display plain text (like `alert()`).
