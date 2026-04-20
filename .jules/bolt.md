@@ -1,0 +1,3 @@
+## 2024-04-20 - Scroll event listener layout thrashing
+**Learning:** Frequent events like `scroll` combined with layout-heavy calculations like `getBoundingClientRect()` can severely degrade animation performance, leading to layout thrashing.
+**Action:** Throttle high-frequency event listeners that trigger layout calculation using `requestAnimationFrame`, along with a boolean flag to track firing state. Furthermore, setting `{ passive: true }` prevents blocking the main thread during scrolling.
