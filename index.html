@@ -31,15 +31,18 @@
                 <div class="search-bar">
                     <div class="search-field">
                         <i class="fas fa-map-marker-alt"></i>
-                        <input type="text" placeholder="Where to?" aria-label="Destination">
+                        <!-- Sentinel: Added maxlength for DoS protection -->
+                        <input type="text" placeholder="Where to?" aria-label="Destination" maxlength="100">
                     </div>
                     <div class="search-field">
                         <i class="far fa-calendar-alt"></i>
-                        <input type="text" placeholder="When?" aria-label="Date">
+                        <!-- Sentinel: Added maxlength for DoS protection -->
+                        <input type="text" placeholder="When?" aria-label="Date" maxlength="100">
                     </div>
                     <div class="search-field">
                         <i class="fas fa-user-friends"></i>
-                        <input type="text" placeholder="Travelers" aria-label="Number of travelers">
+                        <!-- Sentinel: Changed to number type, added min/max for validation -->
+                        <input type="number" placeholder="Travelers" aria-label="Number of travelers" min="1" max="99">
                     </div>
                     <button class="search-btn" aria-label="Search trips">
                         <i class="fas fa-search"></i> Search
