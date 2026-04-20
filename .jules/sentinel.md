@@ -1,0 +1,4 @@
+## 2024-03-21 - Missing Input Validation and Length Limits
+**Vulnerability:** Input fields (`<input>`, `<textarea>`) across the application lacked any length limitations (`maxlength`) and often used incorrect semantic types (e.g., `text` for number of travelers). Additionally, there was no basic pattern blocking for dangerous characters.
+**Learning:** Without length restrictions, attackers can submit excessively large payloads, potentially causing client-side Denial of Service (DoS) by hanging the browser during processing or consuming excessive memory. Missing type constraints also lead to poor data quality.
+**Prevention:** Always apply `maxlength` properties to text inputs, use appropriate semantic HTML5 input types (`number`, `email`), apply `min`/`max` limits where appropriate, and use `pattern` attributes for early rejection of unexpected characters like `<` and `>`.
