@@ -1,0 +1,3 @@
+## 2024-05-24 - Throttling Scroll Listeners
+**Learning:** This project uses a hybrid animation approach. Modern pages (index.html, destinations.html) use the efficient `IntersectionObserver`. However, legacy pages (like contact.html using script.js) use scroll event listeners paired with `getBoundingClientRect()`. This combination causes synchronous layout calculations (layout thrashing) on the main thread during scroll events, leading to jank and dropped frames.
+**Action:** When working with older vanilla JS codebases, always check for unthrottled scroll listeners that perform layout-heavy calculations like `getBoundingClientRect`. Throttle them using `requestAnimationFrame` and register with `{ passive: true }` to unblock the main thread and maintain 60fps.
