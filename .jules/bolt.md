@@ -1,0 +1,3 @@
+## 2026-04-24 - Throttling Scroll Listeners
+**Learning:** Using `window.addEventListener('scroll', ...)` directly with layout-heavy calculations like `getBoundingClientRect()` causes synchronous layout thrashing, which can drop frames. Throttling via `requestAnimationFrame` doesn't fully fix this on its own if the browser must still wait for the main thread.
+**Action:** Always combine `requestAnimationFrame` with `{ passive: true }` when registering scroll event listeners that don't call `preventDefault()`. This unblocks the compositor thread and ensures 60fps scrolling while layout checks are deferred.
