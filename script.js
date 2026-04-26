@@ -56,7 +56,18 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(handleAnimation, 100);
 
     // Check on scroll
-    window.addEventListener('scroll', handleAnimation);
+    // Optimization: Throttle scroll event to prevent layout thrashing and maintain 60fps
+    // Use requestAnimationFrame to only run calculations once per frame
+    let isScrolling = false;
+    window.addEventListener('scroll', () => {
+        if (!isScrolling) {
+            window.requestAnimationFrame(() => {
+                handleAnimation();
+                isScrolling = false;
+            });
+            isScrolling = true;
+        }
+    }, { passive: true }); // passive: true prevents blocking main thread scrolling
 
     // Add hover effect for gallery items
     galleryItems.forEach(item => {
