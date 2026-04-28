@@ -1,0 +1,3 @@
+## 2024-05-24 - Layout thrashing in scroll event handler
+**Learning:** `getBoundingClientRect` forces a synchronous layout calculation. Calling this inside an unthrottled `scroll` event handler causes significant layout thrashing and drops frames, hurting scrolling performance.
+**Action:** Always throttle scroll event listeners that trigger layout-heavy calculations (like `getBoundingClientRect`) using `requestAnimationFrame` with a boolean flag, and register the listener with `{ passive: true }` to maintain 60fps performance and prevent layout thrashing.
