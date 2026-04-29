@@ -45,18 +45,19 @@
                         </div>
                     </div>
                     <div class="contact-form">
+                        <!-- 🛡️ Sentinel: Adding maxlength to prevent resource exhaustion and mitigate DoS vectors from excessively large inputs -->
                         <form id="contactForm">
                             <div class="form-group">
                                 <label for="name">Name</label>
-                                <input type="text" id="name" name="name" required>
+                                <input type="text" id="name" name="name" maxlength="100" required>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" id="email" name="email" required>
+                                <input type="email" id="email" name="email" maxlength="254" required>
                             </div>
                             <div class="form-group">
                                 <label for="message">Message</label>
-                                <textarea id="message" name="message" rows="5" required></textarea>
+                                <textarea id="message" name="message" rows="5" maxlength="2000" required></textarea>
                             </div>
                             <button type="submit" class="submit-btn">Send Message</button>
                         </form>
