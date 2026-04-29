@@ -28,18 +28,19 @@
         <div class="hero-content">
             <h1>EXPLORE</h1>
             <div class="search-container">
+                <!-- 🛡️ Sentinel: Adding maxlength to prevent resource exhaustion and mitigate DoS vectors -->
                 <div class="search-bar">
                     <div class="search-field">
                         <i class="fas fa-map-marker-alt"></i>
-                        <input type="text" placeholder="Where to?" aria-label="Destination">
+                        <input type="text" placeholder="Where to?" aria-label="Destination" maxlength="100">
                     </div>
                     <div class="search-field">
                         <i class="far fa-calendar-alt"></i>
-                        <input type="text" placeholder="When?" aria-label="Date">
+                        <input type="text" placeholder="When?" aria-label="Date" maxlength="50">
                     </div>
                     <div class="search-field">
                         <i class="fas fa-user-friends"></i>
-                        <input type="text" placeholder="Travelers" aria-label="Number of travelers">
+                        <input type="text" placeholder="Travelers" aria-label="Number of travelers" maxlength="50">
                     </div>
                     <button class="search-btn" aria-label="Search trips">
                         <i class="fas fa-search"></i> Search
