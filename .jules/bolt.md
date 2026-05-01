@@ -1,0 +1,3 @@
+## 2024-05-01 - [Scroll Thrashing in Hybrid Animation Architecture]
+**Learning:** This codebase uses a hybrid animation approach: modern pages use `IntersectionObserver`, but legacy external scripts (`script.js` used in contact.html) use naked scroll events triggering `getBoundingClientRect()`. This inconsistency creates hidden layout thrashing bottlenecks.
+**Action:** When working on legacy pages in this hybrid architecture, always wrap layout-heavy scroll handlers with `requestAnimationFrame` throttling and `{ passive: true }` to maintain 60fps without rewriting the whole animation system to use IntersectionObserver.
