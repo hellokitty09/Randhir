@@ -30,16 +30,19 @@
             <div class="search-container">
                 <div class="search-bar">
                     <div class="search-field">
+                        <!-- 🛡️ Sentinel: Added maxlength to prevent excessively large inputs (DoS mitigation) -->
                         <i class="fas fa-map-marker-alt"></i>
-                        <input type="text" placeholder="Where to?" aria-label="Destination">
+                        <input type="text" placeholder="Where to?" aria-label="Destination" maxlength="100">
                     </div>
                     <div class="search-field">
+                        <!-- 🛡️ Sentinel: Added maxlength to prevent excessively large inputs (DoS mitigation) -->
                         <i class="far fa-calendar-alt"></i>
-                        <input type="text" placeholder="When?" aria-label="Date">
+                        <input type="text" placeholder="When?" aria-label="Date" maxlength="50">
                     </div>
                     <div class="search-field">
+                        <!-- 🛡️ Sentinel: Added maxlength to prevent excessively large inputs (DoS mitigation) -->
                         <i class="fas fa-user-friends"></i>
-                        <input type="text" placeholder="Travelers" aria-label="Number of travelers">
+                        <input type="text" placeholder="Travelers" aria-label="Number of travelers" maxlength="20">
                     </div>
                     <button class="search-btn" aria-label="Search trips">
                         <i class="fas fa-search"></i> Search
