@@ -1,0 +1,3 @@
+## 2024-05-08 - [Scroll Listener Layout Thrashing]
+**Learning:** Calling layout-heavy calculations like `getBoundingClientRect()` inside an unthrottled `scroll` event handler can cause severe layout thrashing and drop frames, as the browser attempts to calculate layout for every scroll increment.
+**Action:** Always throttle scroll event listeners using `requestAnimationFrame` with a boolean tracking flag, and register the listener with `{ passive: true }` to avoid blocking main thread scrolling.
