@@ -1,0 +1,3 @@
+## 2025-02-20 - Hybrid Animation Approach Causes Layout Thrashing
+**Learning:** The project uses a hybrid animation approach where modern pages (like `index.html`) use `IntersectionObserver` for animations, while `contact.html` (via `script.js`) relies on an unthrottled `scroll` event listener with synchronous `getBoundingClientRect` calls. This causes severe layout thrashing and performance degradation on scroll.
+**Action:** When working on generic components or scripts that may be included across different pages, ensure animations rely on modern APIs like `IntersectionObserver`. If a `scroll` listener must be used, it must be throttled using `requestAnimationFrame` with a boolean flag and registered with `{ passive: true }` to maintain performance.
