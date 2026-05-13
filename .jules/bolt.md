@@ -1,0 +1,3 @@
+## 2024-05-13 - Throttle scroll event listener
+**Learning:** Attaching a direct `window.addEventListener('scroll', handler)` where the handler performs DOM layout calculations (like `getBoundingClientRect` via `isInViewport`) causes layout thrashing and poor scroll performance (jank). The browser fires scroll events much faster than it can paint frames.
+**Action:** Always throttle scroll or resize event listeners that trigger layout calculations by wrapping them in `window.requestAnimationFrame()`. Use a boolean flag (e.g., `isScrolling`) to ensure only one frame is queued at a time, and add the `{ passive: true }` option to the event listener to tell the browser it won't call `preventDefault()`, allowing for smoother scrolling.
