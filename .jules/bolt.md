@@ -1,0 +1,3 @@
+## 2024-05-15 - Throttling Layout-Heavy Scroll Event Listeners
+**Learning:** Attaching a layout-heavy calculation like `getBoundingClientRect` directly to the `scroll` event can cause layout thrashing and lower FPS due to the event firing at a high frequency. Unthrottled scroll handlers combined with synchronous DOM layout calculations are a typical performance bottleneck in vanilla JS animations.
+**Action:** Always throttle scroll-based layout calculations using `requestAnimationFrame` with a boolean flag, and mark the event listener as `{ passive: true }` to maintain smooth scrolling and 60fps performance without blocking the main thread.
