@@ -1,0 +1,3 @@
+## 2024-03-20 - Throttling Scroll Event Listeners
+**Learning:** Attaching heavy DOM calculation functions (like `getBoundingClientRect()`) directly to the `scroll` event can cause severe layout thrashing and drop frame rates, as scroll events fire at a higher rate than the browser can repaint.
+**Action:** Always throttle scroll-based animations using `requestAnimationFrame` with a boolean flag, and mark the event listener as `{ passive: true }` to prevent scroll blocking.
