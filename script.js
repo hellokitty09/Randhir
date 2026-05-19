@@ -52,11 +52,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Optimization: Throttle scroll event to prevent layout thrashing
+    let isScrolling = false;
+    function throttledScroll() {
+        if (!isScrolling) {
+            window.requestAnimationFrame(() => {
+                handleAnimation();
+                isScrolling = false;
+            });
+            isScrolling = true;
+        }
+    }
+
     // Initial check for elements in viewport with a small delay
     setTimeout(handleAnimation, 100);
 
-    // Check on scroll
-    window.addEventListener('scroll', handleAnimation);
+    // Check on scroll (using passive listener for better scrolling performance)
+    window.addEventListener('scroll', throttledScroll, { passive: true });
 
     // Add hover effect for gallery items
     galleryItems.forEach(item => {
