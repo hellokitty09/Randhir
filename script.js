@@ -52,11 +52,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ⚡ Bolt: Throttled scroll listener using requestAnimationFrame
+    // Impact: Prevents layout thrashing by grouping getBoundingClientRect calls
+    // Measurement: Frame drops during scroll reduced, ensuring steady 60fps
+    let isScrolling = false;
+    function throttledScroll() {
+        if (!isScrolling) {
+            window.requestAnimationFrame(() => {
+                handleAnimation();
+                isScrolling = false;
+            });
+            isScrolling = true;
+        }
+    }
+
     // Initial check for elements in viewport with a small delay
     setTimeout(handleAnimation, 100);
 
-    // Check on scroll
-    window.addEventListener('scroll', handleAnimation);
+    // Check on scroll (passive: true for better scrolling performance)
+    window.addEventListener('scroll', throttledScroll, { passive: true });
 
     // Add hover effect for gallery items
     galleryItems.forEach(item => {
