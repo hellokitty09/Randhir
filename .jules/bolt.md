@@ -1,0 +1,3 @@
+## 2024-03-21 - Throttled scroll listener to prevent layout thrashing
+**Learning:** Calling `getBoundingClientRect()` within an unthrottled `scroll` event listener causes severe layout thrashing, as the browser is forced to recalculate layout on every scroll tick.
+**Action:** Always throttle scroll event listeners that trigger layout-heavy calculations. Using `requestAnimationFrame` with a boolean flag, and `{ passive: true }`, ensures the calculations occur at most once per frame (60fps limit) and don't block the main thread.
