@@ -1,0 +1,3 @@
+## 2024-05-24 - Layout Thrashing in Scroll Event Listeners
+**Learning:** Scroll event listeners that trigger layout-heavy calculations (e.g., `getBoundingClientRect`) can cause severe performance issues (layout thrashing) and jank during scrolling, especially if not throttled or decoupled from the main thread.
+**Action:** Throttle such scroll events using `requestAnimationFrame` with a boolean flag, and register the listener with the `{ passive: true }` option. This ensures the calculations run at most once per frame and don't block the browser's scrolling mechanism.
