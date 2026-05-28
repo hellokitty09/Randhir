@@ -1,0 +1,3 @@
+## 2026-05-28 - Optimize Scroll Event Listeners
+**Learning:** Scroll event listeners that trigger layout-heavy calculations (e.g., `getBoundingClientRect`) can cause layout thrashing and drop frame rates below 60fps if not throttled.
+**Action:** Always throttle scroll event listeners using `requestAnimationFrame` with a boolean flag, and register them with the `{ passive: true }` option to prevent main thread blocking.
