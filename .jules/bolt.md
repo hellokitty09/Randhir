@@ -1,0 +1,3 @@
+## 2026-05-31 - [Hybrid Animation Performance Inconsistency]
+**Learning:** [The project uses a hybrid animation approach: modern pages (index.html, destinations.html, about.html) use inline `IntersectionObserver` scripts, while contact.html uses an external `script.js` for scroll-triggered staggered animations. The external script's scroll listener is highly inefficient because it directly computes `getBoundingClientRect()` on every scroll event without throttling, causing potential layout thrashing.]
+**Action:** [When implementing scroll-based animations, always use `requestAnimationFrame` with a boolean flag to throttle layout-heavy calculations and register the scroll listener with `{ passive: true }` to maintain 60fps performance.]
