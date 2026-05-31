@@ -56,7 +56,18 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(handleAnimation, 100);
 
     // Check on scroll
-    window.addEventListener('scroll', handleAnimation);
+    // ⚡ Bolt: Throttled scroll event listener using requestAnimationFrame and a boolean flag
+    // to prevent layout thrashing from getBoundingClientRect() and maintain 60fps performance.
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                handleAnimation();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }, { passive: true });
 
     // Add hover effect for gallery items
     galleryItems.forEach(item => {
