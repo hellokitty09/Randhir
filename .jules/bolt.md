@@ -1,0 +1,3 @@
+## 2024-06-25 - Scroll Event Throttling
+**Learning:** Scroll event listeners that trigger layout-heavy calculations (e.g., `getBoundingClientRect` via `isInViewport`) execute synchronously on the main thread and can fire dozens of times per second. Without throttling, this leads to significant layout thrashing and dropped frames (jank), dropping performance below the target 60fps.
+**Action:** Always throttle scroll handlers using `requestAnimationFrame` with a boolean tracking flag, and explicitly add the `{ passive: true }` option to the event listener so the browser knows the listener won't call `preventDefault()`, thus unblocking the compositor thread.
