@@ -55,8 +55,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial check for elements in viewport with a small delay
     setTimeout(handleAnimation, 100);
 
-    // Check on scroll
-    window.addEventListener('scroll', handleAnimation);
+    // Check on scroll with requestAnimationFrame throttling for performance
+    let isTicking = false;
+    window.addEventListener('scroll', () => {
+        if (!isTicking) {
+            window.requestAnimationFrame(() => {
+                handleAnimation();
+                isTicking = false;
+            });
+            isTicking = true;
+        }
+    }, { passive: true });
 
     // Add hover effect for gallery items
     galleryItems.forEach(item => {
