@@ -48,15 +48,18 @@
                         <form id="contactForm">
                             <div class="form-group">
                                 <label for="name">Name</label>
-                                <input type="text" id="name" name="name" required>
+                                <!-- 🛡️ Sentinel: Added maxlength to mitigate overly large inputs (DoS vectors) -->
+                                <input type="text" id="name" name="name" required maxlength="100">
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" id="email" name="email" required>
+                                <!-- 🛡️ Sentinel: Added maxlength to mitigate overly large inputs (DoS vectors) -->
+                                <input type="email" id="email" name="email" required maxlength="254">
                             </div>
                             <div class="form-group">
                                 <label for="message">Message</label>
-                                <textarea id="message" name="message" rows="5" required></textarea>
+                                <!-- 🛡️ Sentinel: Added maxlength to mitigate overly large inputs (DoS vectors) -->
+                                <textarea id="message" name="message" rows="5" required maxlength="1000"></textarea>
                             </div>
                             <button type="submit" class="submit-btn">Send Message</button>
                         </form>
