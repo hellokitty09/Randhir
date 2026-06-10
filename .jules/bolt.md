@@ -1,0 +1,3 @@
+## 2024-05-24 - Unthrottled scroll event triggers layout-heavy calculations
+**Learning:** Found an unthrottled `scroll` event listener in `script.js` triggering layout calculations (`getBoundingClientRect`) directly. This causes main thread blocking and layout thrashing, reducing frame rates on scroll.
+**Action:** Always throttle scroll and resize event listeners using `requestAnimationFrame` with a boolean flag, and register the listener with `{ passive: true }` to unblock scroll performance.
