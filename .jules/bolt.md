@@ -1,0 +1,3 @@
+## 2024-03-21 - Throttling Scroll Event Listeners with RequestAnimationFrame
+**Learning:** Attaching a scroll event listener directly to functions containing layout-heavy calculations like `getBoundingClientRect()` (such as our `isInViewport` check for animations) causes significant layout thrashing and drops frames, failing to maintain 60fps performance on scroll.
+**Action:** Always throttle scroll event listeners using `window.requestAnimationFrame()` with a boolean flag, and register the listener with the `{ passive: true }` option to ensure smooth scrolling and prevent main thread blocking.
