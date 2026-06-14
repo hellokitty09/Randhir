@@ -1,0 +1,4 @@
+## 2024-05-17 - Add Content-Security-Policy (CSP) headers to static HTML files
+**Vulnerability:** The application was missing Content-Security-Policy (CSP) headers, making it vulnerable to Cross-Site Scripting (XSS) and other code injection attacks.
+**Learning:** Static sites without backend servers still need robust CSP meta tags to restrict where scripts, styles, and images can be loaded from. In environments where inline scripts/styles are required, using `'unsafe-inline'` is a necessary trade-off, but `default-src 'self'` provides a strong baseline defense. Dynamic verification of CSP using Playwright console listeners is an effective way to confirm nothing breaks without a live user.
+**Prevention:** Always implement a restrictive `Content-Security-Policy` via meta tags in static HTML files (or via HTTP headers if a server is present). Specifically allow only required third-party domains (e.g., cdnjs, Google Fonts, Unsplash) and fallback to `'self'`.
