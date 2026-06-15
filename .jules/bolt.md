@@ -1,0 +1,3 @@
+## 2024-06-15 - Scroll Event Throttling and Passive Listeners
+**Learning:** Attaching `scroll` event listeners that perform layout-heavy calculations (like `getBoundingClientRect`) directly can cause significant performance degradation and layout thrashing, as scroll events fire synchronously at a high rate. Additionally, not marking scroll listeners as `passive: true` can delay scrolling on some browsers as they wait to see if `preventDefault()` is called.
+**Action:** Always throttle scroll event callbacks using `requestAnimationFrame` and a boolean flag (`isScrolling`) to align with the browser's render cycle. When the event doesn't call `preventDefault()`, always use `{ passive: true }` when attaching the listener to improve scroll performance.
