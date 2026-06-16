@@ -1,0 +1,3 @@
+## 2024-05-18 - Optimize scroll listener performance
+**Learning:** Attaching a direct event listener to `scroll` that triggers layout-heavy calculations (such as `getBoundingClientRect()` within `isInViewport`) causes significant layout thrashing and severely impacts frame rates. The browser can emit scroll events at a much higher frequency than the screen refresh rate, leading to redundant work and performance degradation.
+**Action:** When implementing scroll-based animations or calculations, always throttle the `scroll` event listener using `requestAnimationFrame` and a boolean flag (e.g., `isScrolling`). Additionally, pass `{ passive: true }` to the event listener so the browser doesn't block the main thread waiting to see if default behavior will be prevented.
