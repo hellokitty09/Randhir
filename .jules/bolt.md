@@ -1,0 +1,3 @@
+## 2024-05-24 - Throttling Scroll Event Listeners
+**Learning:** Frequent scroll events trigger layout-heavy calculations (like `getBoundingClientRect`) repeatedly on the main thread, leading to layout thrashing and dropped frames. Scroll events alone can fire dozens of times per second.
+**Action:** Always throttle scroll-based visual updates using `requestAnimationFrame` with a boolean tracking flag, and add `{ passive: true }` to the event listener so the browser knows not to wait for `preventDefault()`, improving scrolling performance.
