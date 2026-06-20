@@ -1,0 +1,3 @@
+## 2024-03-22 - Throttling Scroll Event Listeners
+**Learning:** Attaching a direct scroll event listener that executes layout-heavy calculations (like `getBoundingClientRect` in `isInViewport` check) can cause severe layout thrashing and drop performance below 60fps (jank).
+**Action:** Always throttle scroll events using `requestAnimationFrame` to run the visual update logic only once per frame, and register the listener with `{ passive: true }` to notify the browser that preventDefault will not be called, unblocking smooth scrolling.
