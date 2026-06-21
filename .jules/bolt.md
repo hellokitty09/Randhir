@@ -1,0 +1,3 @@
+## 2024-05-14 - Scroll Event Optimization
+**Learning:** The application uses an external script for `contact.html` that runs scroll event handlers checking `getBoundingClientRect()` constantly without any debouncing or throttling. This triggers synchronous layout thrashing and can cause significant frame drops on complex pages since scroll events fire far more often than the browser can render frames.
+**Action:** Always throttle scroll and resize event listeners that trigger layout computations (like `getBoundingClientRect()`) using `requestAnimationFrame` with a ticking boolean flag, and register the listener with `{ passive: true }` to maintain 60fps performance and avoid blocking scrolling.
