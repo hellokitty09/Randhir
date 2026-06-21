@@ -1,0 +1,4 @@
+## 2025-01-22 - [Add Content Security Policy (CSP)]
+**Vulnerability:** [Missing Content Security Policy (CSP) leaving the site vulnerable to XSS and data injection attacks.]
+**Learning:** [The static architecture lacked a mechanism to restrict the sources of executable scripts, stylesheets, fonts, and images. Since the application uses external resources like Google Fonts, Cloudflare CDNs, and Unsplash images, it needs a specific policy to allow these while blocking malicious external sources. Also, due to inline scripts and styles, 'unsafe-inline' had to be permitted.]
+**Prevention:** [Implement a robust `Content-Security-Policy` meta tag in the `<head>` of all HTML files. Continuously review and tighten the CSP directives (e.g., extracting inline scripts/styles to external files to remove 'unsafe-inline' in the future) as the project evolves.]
