@@ -1,0 +1,3 @@
+## 2026-06-22 - [Optimized Scroll Listener Layout Thrashing]
+**Learning:** [Continuous scroll events executing layout-heavy operations (like getBoundingClientRect inside isInViewport) block the main thread and severely degrade frame rate (layout thrashing).]
+**Action:** [Always throttle scroll event listeners using requestAnimationFrame with a boolean flag, and pass { passive: true } to the event listener options to maintain 60fps scrolling performance.]
