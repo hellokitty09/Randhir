@@ -1,0 +1,3 @@
+## 2024-05-18 - Unthrottled scroll event listeners with layout-heavy calculations
+**Learning:** Using `getBoundingClientRect()` inside an unthrottled `scroll` event listener causes severe layout thrashing and drops frames, hurting 60fps rendering performance. The `getBoundingClientRect()` forces a synchronous layout calculation in the browser, and doing this on every scroll event (which can fire dozens of times per second) is a critical performance bottleneck.
+**Action:** Always throttle scroll event handlers, ideally using `requestAnimationFrame` with a boolean flag (e.g. `ticking`) to ensure calculations happen once per visual frame. Also, register the event listener with `{ passive: true }` to avoid blocking scrolling while the handler runs.
