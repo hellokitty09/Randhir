@@ -1,0 +1,4 @@
+## 2026-06-25 - Content Security Policy (CSP) Missing
+**Vulnerability:** The static website completely lacked a Content Security Policy (CSP) header or meta tag, allowing potentially unrestricted execution of malicious scripts and loading of unauthorized resources.
+**Learning:** Due to the reliance on third-party CDNs for styles (cdnjs, google fonts) and images (unsplash), and the use of inline scripts and styles across multiple HTML files, the CSP must be explicitly configured to allow these sources while still restricting unknown origins.
+**Prevention:** Implement a restrictive but functional CSP on all new HTML pages by default, utilizing `default-src 'self'` as a baseline and explicitly allowlisting required CDNs and inline resources using `script-src` and `style-src`.
