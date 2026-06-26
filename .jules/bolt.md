@@ -1,0 +1,3 @@
+## 2024-05-15 - Throttling Scroll Event Listeners
+**Learning:** High-frequency events like scroll can trigger performance bottlenecks when connected to layout-heavy functions (e.g., `getBoundingClientRect`). Without throttling, these events cause excessive re-renders and janky scrolling (layout thrashing) because the browser cannot keep up with calculating layouts at the rate events fire.
+**Action:** Always throttle scroll or resize events using `requestAnimationFrame` and a boolean flag (`isScrolling`), and consider `IntersectionObserver` when applicable. Additionally, pass `{ passive: true }` when registering the listener so the browser doesn't wait for a possible `e.preventDefault()`, which keeps scrolling smooth.
