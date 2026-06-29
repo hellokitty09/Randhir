@@ -1,0 +1,3 @@
+## 2024-03-20 - [Throttle Scroll Events with `requestAnimationFrame`]
+**Learning:** Raw scroll event listeners in `script.js` were directly calling `handleAnimation`, which internally executes `getBoundingClientRect` for each gallery item. This causes synchronous layout calculation (layout thrashing) on the main thread for every scroll tick, degrading animation performance (FPS drop).
+**Action:** Always throttle high-frequency layout-reading events (like scroll/resize) using a boolean flag combined with `requestAnimationFrame` to limit execution to 60fps, and attach them using `{ passive: true }` so the browser can optimize scrolling.
