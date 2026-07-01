@@ -1,0 +1,4 @@
+## 2024-07-01 - Add Content Security Policy
+**Vulnerability:** Missing Content Security Policy (CSP), increasing the risk and potential impact of Cross-Site Scripting (XSS) and data injection attacks.
+**Learning:** The static architecture of the site relies on inline scripts (for IntersectionObserver) and inline styles, as well as external assets from multiple domains (cdnjs.cloudflare.com, fonts.googleapis.com, images.unsplash.com). A proper CSP must explicitly allow these sources using 'unsafe-inline' and specific domains to avoid breaking functionality.
+**Prevention:** Always include a baseline Content Security Policy for web applications, carefully tailored to the required domains and architectural needs, even for static sites.
