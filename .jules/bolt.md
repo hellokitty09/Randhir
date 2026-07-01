@@ -1,0 +1,3 @@
+## 2023-10-25 - Scroll Event Listener Layout Thrashing
+**Learning:** Directly attaching layout-heavy calculations (like `getBoundingClientRect` used in `isInViewport`) to the raw `scroll` event can cause severe layout thrashing and frame drops, as it fires synchronously on the main thread more often than the browser can paint.
+**Action:** Always throttle scroll event handlers that read DOM layout properties by using `requestAnimationFrame` and a boolean flag, and register the listener with `{ passive: true }` to maintain 60fps scrolling performance.
