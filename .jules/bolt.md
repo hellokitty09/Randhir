@@ -1,0 +1,3 @@
+## 2024-07-02 - Throttling Scroll Events with requestAnimationFrame
+**Learning:** Directly attaching `getBoundingClientRect` calls to `scroll` events causes layout thrashing and significant main thread blocking, which drops FPS during scrolling. While the modern pages use `IntersectionObserver` (a better approach), the legacy script.js still uses direct DOM queries on scroll.
+**Action:** Always throttle scroll/resize event handlers that trigger layout changes or measurements. Use `requestAnimationFrame` and a boolean flag (or debounce) to ensure they run at most once per frame (60fps). Add `{ passive: true }` to the event listener so the browser knows the handler won't call `preventDefault()`, allowing for smoother scrolling.
