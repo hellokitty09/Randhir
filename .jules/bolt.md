@@ -1,0 +1,3 @@
+## 2024-05-24 - Layout Thrashing in Scroll Event Listeners
+**Learning:** Found a performance bottleneck where `window.addEventListener('scroll', handleAnimation)` directly calls `getBoundingClientRect()` on multiple elements without throttling. This causes synchronous layout calculations (layout thrashing) on every single scroll event, leading to significant main thread blocking and frame drops (jank).
+**Action:** Always wrap scroll-triggered DOM calculations (like `getBoundingClientRect`) in a `requestAnimationFrame` callback protected by a boolean ticking flag to decouple layout calculations from the scroll event firing rate. Additionally, use `{ passive: true }` when registering the scroll listener to prevent it from blocking the browser's native scroll performance.
