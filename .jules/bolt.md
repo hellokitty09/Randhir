@@ -1,0 +1,3 @@
+## 2024-03-21 - Unthrottled scroll listeners with getBoundingClientRect cause layout thrashing
+**Learning:** Attaching a direct scroll event listener that calls `getBoundingClientRect` on multiple elements causes significant layout thrashing on every scroll event (up to 60+ times per second). In `script.js`, `handleAnimation` iterated over all gallery items and called `getBoundingClientRect` on each on every raw scroll event.
+**Action:** Always throttle scroll event listeners that perform layout calculations or DOM reads. Use `requestAnimationFrame` with a boolean flag (e.g. `isScrolling`) and the `{ passive: true }` option to ensure smooth 60fps scrolling and avoid main thread blocking.
