@@ -1,0 +1,4 @@
+## 2024-07-08 - Added Strict Content Security Policy (CSP)
+**Vulnerability:** A missing Content Security Policy exposed the application to potential Cross-Site Scripting (XSS) risks. Even though this is a static site, inline scripts/styles and external resources (Google Fonts, Font Awesome, Unsplash images) were loaded without explicit restriction.
+**Learning:** Due to the hybrid animation approach and inline scripts/styles present in the HTML files, `'unsafe-inline'` had to be used for `script-src` and `style-src`. External CDNs (cdnjs, fonts.googleapis, fonts.gstatic, images.unsplash) needed to be explicitly whitelisted.
+**Prevention:** Always implement a strict CSP by default in the `<head>` of HTML documents. For future iterations or dynamic replacements, minimize the use of inline scripts and styles so that `'unsafe-inline'` can be completely removed to achieve an even stricter policy.
