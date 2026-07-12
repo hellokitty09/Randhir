@@ -1,0 +1,3 @@
+## 2024-07-12 - Scroll Event Throttling for Layout-Heavy Tasks
+**Learning:** Unthrottled `scroll` event listeners that trigger layout-heavy calculations (like `getBoundingClientRect` for gallery animation visibility checks) can cause layout thrashing and drop frame rates below 60fps on this project.
+**Action:** Always throttle scroll-bound DOM calculation events using a boolean flag, `requestAnimationFrame`, and the `{ passive: true }` option to maintain high scrolling performance.
