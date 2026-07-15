@@ -1,0 +1,3 @@
+## 2024-05-18 - Throttling Layout-Heavy Scroll Event Listeners
+**Learning:** Unthrottled `scroll` event listeners that trigger layout-heavy calculations (like `getBoundingClientRect` for determining if elements are in the viewport) can cause significant layout thrashing, severely degrading rendering performance.
+**Action:** Always throttle layout-heavy operations bound to scroll events using `requestAnimationFrame` with a boolean flag, and register the event listener with `{ passive: true }` to maintain 60fps performance without blocking the main thread.
