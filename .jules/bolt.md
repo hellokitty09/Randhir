@@ -1,0 +1,3 @@
+## 2024-05-18 - Prevent Layout Thrashing from Unthrottled Scroll Events
+**Learning:** Unthrottled scroll event listeners that perform layout-heavy calculations (like `getBoundingClientRect()`) block the main thread and severely degrade performance, causing layout thrashing and dropping frames well below 60fps.
+**Action:** Always throttle scroll and resize event listeners. Use `requestAnimationFrame` with a boolean flag to limit execution to screen refresh rates, and register the listener with `{ passive: true }` so it doesn't block scrolling.
