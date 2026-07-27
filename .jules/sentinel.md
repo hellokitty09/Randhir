@@ -1,0 +1,5 @@
+## 2024-07-27 - Added Content Security Policy (CSP)
+
+**Vulnerability:** Found a surprising security gap: the entire static website (index.html, about.html, contact.html, destinations.html) lacked a Content Security Policy (CSP). Without a CSP, the application is inherently vulnerable to Cross-Site Scripting (XSS) attacks if any future dynamic content or user input is improperly handled.
+**Learning:** Even simple static sites require defense-in-depth mechanisms like CSP to mitigate potential XSS, especially when utilizing inline scripts and remote assets from CDNs (e.g., FontAwesome, Google Fonts, Unsplash).
+**Prevention:** Implement a strong, default CSP as early as possible in the project lifecycle, tailored to the specific asset domains required, and enforce it across all entry points (HTML files or server headers).
