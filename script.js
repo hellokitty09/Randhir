@@ -55,8 +55,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial check for elements in viewport with a small delay
     setTimeout(handleAnimation, 100);
 
-    // Check on scroll
-    window.addEventListener('scroll', handleAnimation);
+    // ⚡ Bolt: Optimize scroll events by throttling with requestAnimationFrame
+    // and using passive listener to prevent main thread blocking
+    let isScrolling = false;
+    window.addEventListener('scroll', () => {
+        if (!isScrolling) {
+            window.requestAnimationFrame(() => {
+                handleAnimation();
+                isScrolling = false;
+            });
+            isScrolling = true;
+        }
+    }, { passive: true });
 
     // Add hover effect for gallery items
     galleryItems.forEach(item => {
