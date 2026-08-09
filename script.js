@@ -82,6 +82,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
             
+            // 🛡️ Sentinel: Enforce max lengths server-side equivalent before processing
+            if (name.length > 100 || email.length > 100 || message.length > 1000) {
+                alert("Input length exceeded.");
+                return;
+            }
+
             // Here you would typically send the form data to a server
             // For now, we'll just show an alert
             alert(`Thank you for your message, ${name}! We'll get back to you at ${email} soon.`);
