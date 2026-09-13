@@ -56,7 +56,16 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(handleAnimation, 100);
 
     // Check on scroll
-    window.addEventListener('scroll', handleAnimation);
+    // ⚡ Bolt: Throttled scroll event listener to reduce main thread blocking from getBoundingClientRect during scroll.
+    // Expected impact: Significantly reduces main thread blocking and layout recalculations during active scrolling.
+    let throttleTimer;
+    window.addEventListener('scroll', () => {
+        if (throttleTimer) return;
+        throttleTimer = setTimeout(() => {
+            handleAnimation();
+            throttleTimer = null;
+        }, 50);
+    });
 
     // Add hover effect for gallery items
     galleryItems.forEach(item => {
