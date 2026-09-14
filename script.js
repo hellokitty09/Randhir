@@ -26,37 +26,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Add sliding animation for gallery items
+    // ⚡ Bolt: Replaced expensive scroll listener and getBoundingClientRect with IntersectionObserver
+    // This prevents main thread blocking and layout thrashing during scroll events
     const galleryItems = document.querySelectorAll('.gallery-item');
     
-    // Function to check if element is in viewport
-    function isInViewport(element) {
-        const rect = element.getBoundingClientRect();
-        return (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting && !entry.target.classList.contains('slide-in')) {
+                    const index = Array.from(galleryItems).indexOf(entry.target);
+                    setTimeout(() => {
+                        entry.target.classList.add('slide-in');
+                    }, index * 100);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        galleryItems.forEach(item => observer.observe(item));
     }
-
-    // Function to handle animation
-    function handleAnimation() {
-        galleryItems.forEach((item, index) => {
-            if (isInViewport(item) && !item.classList.contains('slide-in')) {
-                // Add delay based on index for staggered animation
-                setTimeout(() => {
-                    item.classList.add('slide-in');
-                }, index * 100);
-            }
-        });
-    }
-
-    // Initial check for elements in viewport with a small delay
-    setTimeout(handleAnimation, 100);
-
-    // Check on scroll
-    window.addEventListener('scroll', handleAnimation);
 
     // Add hover effect for gallery items
     galleryItems.forEach(item => {
