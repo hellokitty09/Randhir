@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- 🛡️ Sentinel: Added Content-Security-Policy to mitigate XSS and restrict resource loading -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' cdnjs.cloudflare.com fonts.googleapis.com; font-src 'self' cdnjs.cloudflare.com fonts.gstatic.com; img-src 'self' images.unsplash.com data:;">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wanderlust - Your Next Adventure Awaits</title>
     <link rel="stylesheet" href="styles.css">
