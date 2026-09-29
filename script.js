@@ -52,24 +52,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Initial check for elements in viewport with a small delay
-    setTimeout(handleAnimation, 100);
+    if (galleryItems.length > 0) {
+        // ⚡ Bolt: Only attach scroll listener and initial timeout if gallery items exist to prevent unnecessary empty function executions.
+        // Initial check for elements in viewport with a small delay
+        setTimeout(handleAnimation, 100);
 
-    // Check on scroll
-    window.addEventListener('scroll', handleAnimation);
+        // Check on scroll
+        window.addEventListener('scroll', handleAnimation);
 
-    // Add hover effect for gallery items
-    galleryItems.forEach(item => {
-        item.addEventListener('mouseenter', () => {
-            const overlay = item.querySelector('.overlay');
-            overlay.style.transform = 'translateY(0)';
+        // Add hover effect for gallery items
+        galleryItems.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                const overlay = item.querySelector('.overlay');
+                overlay.style.transform = 'translateY(0)';
+            });
+
+            item.addEventListener('mouseleave', () => {
+                const overlay = item.querySelector('.overlay');
+                overlay.style.transform = 'translateY(100%)';
+            });
         });
-
-        item.addEventListener('mouseleave', () => {
-            const overlay = item.querySelector('.overlay');
-            overlay.style.transform = 'translateY(100%)';
-        });
-    });
+    }
 
     // Handle contact form submission
     const contactForm = document.getElementById('contactForm');
