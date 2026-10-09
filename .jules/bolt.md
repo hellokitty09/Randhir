@@ -1,0 +1,3 @@
+## 2024-10-09 - [Prevent empty scroll event executions from shared scripts]
+**Learning:** Attaching global scroll event handlers in a shared script (like `script.js` loaded on `contact.html`) without checking if the target elements (`.gallery-item`) exist leads to unnecessary empty function executions on every scroll tick.
+**Action:** Wrap initialization logic in existence checks (e.g., `if (elements.length > 0)`) to avoid attaching redundant event listeners.
