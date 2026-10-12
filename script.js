@@ -29,47 +29,50 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add sliding animation for gallery items
     const galleryItems = document.querySelectorAll('.gallery-item');
     
-    // Function to check if element is in viewport
-    function isInViewport(element) {
-        const rect = element.getBoundingClientRect();
-        return (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
-    }
+    // ⚡ Bolt: Prevent unnecessary empty function executions when no gallery items exist
+    if (galleryItems.length > 0) {
+        // Function to check if element is in viewport
+        function isInViewport(element) {
+            const rect = element.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
 
-    // Function to handle animation
-    function handleAnimation() {
-        galleryItems.forEach((item, index) => {
-            if (isInViewport(item) && !item.classList.contains('slide-in')) {
-                // Add delay based on index for staggered animation
-                setTimeout(() => {
-                    item.classList.add('slide-in');
-                }, index * 100);
-            }
+        // Function to handle animation
+        function handleAnimation() {
+            galleryItems.forEach((item, index) => {
+                if (isInViewport(item) && !item.classList.contains('slide-in')) {
+                    // Add delay based on index for staggered animation
+                    setTimeout(() => {
+                        item.classList.add('slide-in');
+                    }, index * 100);
+                }
+            });
+        }
+
+        // Initial check for elements in viewport with a small delay
+        setTimeout(handleAnimation, 100);
+
+        // Check on scroll
+        window.addEventListener('scroll', handleAnimation);
+
+        // Add hover effect for gallery items
+        galleryItems.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                const overlay = item.querySelector('.overlay');
+                overlay.style.transform = 'translateY(0)';
+            });
+
+            item.addEventListener('mouseleave', () => {
+                const overlay = item.querySelector('.overlay');
+                overlay.style.transform = 'translateY(100%)';
+            });
         });
     }
-
-    // Initial check for elements in viewport with a small delay
-    setTimeout(handleAnimation, 100);
-
-    // Check on scroll
-    window.addEventListener('scroll', handleAnimation);
-
-    // Add hover effect for gallery items
-    galleryItems.forEach(item => {
-        item.addEventListener('mouseenter', () => {
-            const overlay = item.querySelector('.overlay');
-            overlay.style.transform = 'translateY(0)';
-        });
-
-        item.addEventListener('mouseleave', () => {
-            const overlay = item.querySelector('.overlay');
-            overlay.style.transform = 'translateY(100%)';
-        });
-    });
 
     // Handle contact form submission
     const contactForm = document.getElementById('contactForm');
