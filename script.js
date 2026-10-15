@@ -29,6 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add sliding animation for gallery items
     const galleryItems = document.querySelectorAll('.gallery-item');
     
+    // ⚡ Bolt: Only attach scroll listener and animation logic if elements exist
+    if (galleryItems.length > 0) {
     // Function to check if element is in viewport
     function isInViewport(element) {
         const rect = element.getBoundingClientRect();
@@ -70,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
             overlay.style.transform = 'translateY(100%)';
         });
     });
+    }
 
     // Handle contact form submission
     const contactForm = document.getElementById('contactForm');
