@@ -53,10 +53,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Initial check for elements in viewport with a small delay
-    setTimeout(handleAnimation, 100);
+    // ⚡ Bolt: Only schedule and bind animation handlers if gallery items exist, preventing unnecessary empty function executions on every scroll event
+    if (galleryItems.length > 0) {
+        setTimeout(handleAnimation, 100);
 
-    // Check on scroll
-    window.addEventListener('scroll', handleAnimation);
+        // Check on scroll
+        window.addEventListener('scroll', handleAnimation);
+    }
 
     // Add hover effect for gallery items
     galleryItems.forEach(item => {
