@@ -52,11 +52,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Initial check for elements in viewport with a small delay
-    setTimeout(handleAnimation, 100);
+    // ⚡ Bolt: Prevent unnecessary empty function executions on scroll when gallery items don't exist
+    if (galleryItems.length > 0) {
+        // Initial check for elements in viewport with a small delay
+        setTimeout(handleAnimation, 100);
 
-    // Check on scroll
-    window.addEventListener('scroll', handleAnimation);
+        // Check on scroll
+        window.addEventListener('scroll', handleAnimation);
+    }
 
     // Add hover effect for gallery items
     galleryItems.forEach(item => {
